@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ollama-vision": {
+      "command": "python",
+      "args": ["-m", "src.server"],
+      "cwd": "C:\\Users\\ekirjad\\MCP\\ollama-vision-mcp",
+      "env": {
+        "OLLAMA_VISION_DEFAULT_MODEL": "llava-phi3",
+        "OLLAMA_VISION_LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}
