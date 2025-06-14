@@ -1,0 +1,26 @@
+{
+  "servers": {
+    "ollama-vision-mcp": {
+      "enabled": true,
+      "command": "C:\\Users\\YOUR_USERNAME\\path\\to\\ollama-vision-mcp\\venv\\Scripts\\python.exe",
+      "args": ["-m", "src.server"],
+      "cwd": "C:\\Users\\YOUR_USERNAME\\path\\to\\ollama-vision-mcp",
+      "autoStart": false,
+      "description": "Ollama vision model for local image analysis",
+      "timeout": 10,
+      "toolTimeout": 120,
+      "env": {
+        "OLLAMA_VISION_DEFAULT_MODEL": "llava-phi3",
+        "OLLAMA_VISION_TIMEOUT": "120",
+        "OLLAMA_VISION_LOG_LEVEL": "INFO"
+      },
+      "_notes": {
+        "virtual_environment": "Using venv is recommended to avoid dependency conflicts",
+        "timeout": "General timeout for server initialization and health checks",
+        "toolTimeout": "Specific timeout for image analysis operations (should match OLLAMA_VISION_TIMEOUT)",
+        "autoStart": "Set to false to start manually when needed, saves resources",
+        "models": "Supported models: llava-phi3, llava:7b, llava:13b, bakllava"
+      }
+    }
+  }
+}

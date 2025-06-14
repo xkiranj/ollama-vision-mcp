@@ -28,11 +28,21 @@ ollama pull llava-phi3
 ### 3. Install Ollama Vision MCP
 
 ```bash
-# Option A: From source (recommended for now)
+# Navigate to the project directory
 cd C:\Users\ekirjad\MCP\ollama-vision-mcp
-pip install -e .
 
-# Option B: Using pip directly
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# Install the package
+pip install -e .
+# Or just install requirements
 pip install -r requirements.txt
 ```
 
@@ -51,13 +61,15 @@ Add to `%APPDATA%\Claude\claude_desktop_config.json`:
 {
   "mcpServers": {
     "ollama-vision": {
-      "command": "python",
+      "command": "C:\\Users\\ekirjad\\MCP\\ollama-vision-mcp\\venv\\Scripts\\python.exe",
       "args": ["-m", "src.server"],
       "cwd": "C:\\Users\\ekirjad\\MCP\\ollama-vision-mcp"
     }
   }
 }
 ```
+
+**Note**: If you installed without virtual environment, use `"command": "python"` instead.
 
 ### 6. Restart Claude Desktop
 

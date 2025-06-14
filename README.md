@@ -65,23 +65,68 @@ ollama run llava-phi3 "describe a simple scene"
 
 ## 🚀 Installation
 
-### Option 1: Install from PyPI (Will be available in the future)
+### Important: Use Virtual Environment (Recommended)
+
+Using a virtual environment is strongly recommended to avoid conflicts with system Python packages:
+
+#### Windows
 ```bash
-pip install ollama-vision-mcp
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+venv\Scripts\activate
+
+# You should see (venv) in your command prompt
 ```
 
-### Option 2: Install from Source (Recommended)
+#### macOS/Linux
 ```bash
-git clone https://github.com/ollama-vision-mcp/ollama-vision-mcp
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+source venv/bin/activate
+
+# You should see (venv) in your terminal prompt
+```
+
+### Option 1: Install from GitHub (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/ollama-vision-mcp
 cd ollama-vision-mcp
+
+# Create and activate virtual environment (see above)
+# Then install in development mode
 pip install -e .
+```
+
+### Option 2: Install from PyPI (Coming Soon)
+```bash
+# Create and activate virtual environment (see above)
+# Then install
+pip install ollama-vision-mcp
 ```
 
 ### Option 3: Manual Installation
 ```bash
 # Clone or download this repository
 cd ollama-vision-mcp
+
+# Create and activate virtual environment (see above)
+# Then install dependencies
 pip install -r requirements.txt
+```
+
+### Deactivating Virtual Environment
+When you're done working with the project:
+```bash
+# Windows
+deactivate
+
+# macOS/Linux
+deactivate
 ```
 
 ## ⚙️ Configuration
@@ -160,11 +205,12 @@ Add to your Claude Desktop configuration:
 **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 **Linux**: `~/.config/claude/claude_desktop_config.json`
 
+#### Using Virtual Environment (Recommended)
 ```json
 {
   "mcpServers": {
     "ollama-vision": {
-      "command": "python",
+      "command": "C:\\path\\to\\ollama-vision-mcp\\venv\\Scripts\\python.exe",
       "args": ["-m", "src.server"],
       "cwd": "C:\\path\\to\\ollama-vision-mcp"
     }
@@ -172,12 +218,27 @@ Add to your Claude Desktop configuration:
 }
 ```
 
-Or if installed via pip:
+**macOS/Linux with venv:**
 ```json
 {
   "mcpServers": {
     "ollama-vision": {
-      "command": "ollama-vision-mcp"
+      "command": "/path/to/ollama-vision-mcp/venv/bin/python",
+      "args": ["-m", "src.server"],
+      "cwd": "/path/to/ollama-vision-mcp"
+    }
+  }
+}
+```
+
+#### Without Virtual Environment
+```json
+{
+  "mcpServers": {
+    "ollama-vision": {
+      "command": "python",
+      "args": ["-m", "src.server"],
+      "cwd": "C:\\path\\to\\ollama-vision-mcp"
     }
   }
 }
@@ -204,6 +265,29 @@ Add to your Cursor settings:
 
 Add to your `config/mcp_config.json`:
 
+#### With Virtual Environment (Recommended)
+```json
+{
+  "servers": {
+    "ollama-vision-mcp": {
+      "enabled": true,
+      "command": "C:\\path\\to\\ollama-vision-mcp\\venv\\Scripts\\python.exe",
+      "args": ["-m", "src.server"],
+      "cwd": "C:\\path\\to\\ollama-vision-mcp",
+      "autoStart": false,
+      "description": "Ollama vision model for image analysis",
+      "timeout": 10,
+      "toolTimeout": 120,
+      "env": {
+        "OLLAMA_VISION_DEFAULT_MODEL": "llava-phi3",
+        "OLLAMA_VISION_TIMEOUT": "120"
+      }
+    }
+  }
+}
+```
+
+#### Without Virtual Environment
 ```json
 {
   "servers": {
@@ -212,7 +296,6 @@ Add to your `config/mcp_config.json`:
       "command": "python",
       "args": ["-m", "src.server"],
       "cwd": "C:\\path\\to\\ollama-vision-mcp",
-      "Allowed Paths": "C:\\path\\to\\allowed_folder_1; C:\\path\\to\\allowed_folder_2",
       "autoStart": false,
       "description": "Ollama vision model for image analysis",
       "timeout": 10,
@@ -266,6 +349,18 @@ Once integrated with your MCP client, you can use natural language to analyze im
 
 Test the server directly:
 
+```bash
+# First activate virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# Then run your test script
+python test_ollama_vision.py
+```
+
+Example test script:
 ```python
 # test_ollama_vision.py
 import asyncio
@@ -280,6 +375,13 @@ asyncio.run(test())
 
 ### Run Tests
 ```bash
+# Activate virtual environment first
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# Run tests
 pytest tests/
 ```
 
